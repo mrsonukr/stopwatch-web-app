@@ -63,7 +63,7 @@ function App() {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     const ms = Math.floor((milliseconds % 1000) / 10);
-    
+
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')}`;
   };
 
@@ -91,7 +91,7 @@ function App() {
   const handleReset = () => {
     // Save current session before resetting if there's time recorded
     saveSession();
-    
+
     setIsRunning(false);
     setTime(0);
     setLapTimes([]);
@@ -182,7 +182,7 @@ function App() {
                 </button>
               </div>
             </div>
-            
+
             <div className="overflow-y-auto max-h-96">
               {sessions.length === 0 ? (
                 <div className="p-8 text-center text-gray-500">
@@ -194,7 +194,7 @@ function App() {
                 sessions.map((session) => {
                   const sessionFastest = getFastest(session.lapTimes);
                   const sessionSlowest = getSlowest(session.lapTimes);
-                  
+
                   return (
                     <div key={session.id} className="border-b border-gray-100 last:border-b-0">
                       <div className="p-4">
@@ -214,7 +214,7 @@ function App() {
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
-                        
+
                         {session.lapTimes.length > 0 && (
                           <div className="space-y-2">
                             <div className="text-sm font-medium text-gray-700">
@@ -224,11 +224,10 @@ function App() {
                               {session.lapTimes.map((lap) => (
                                 <div
                                   key={lap.id}
-                                  className={`flex justify-between items-center text-sm p-2 rounded-lg ${
-                                    lap.lapTime === sessionFastest ? 'bg-green-50 text-green-700' :
-                                    lap.lapTime === sessionSlowest ? 'bg-red-50 text-red-700' :
-                                    'bg-gray-50 text-gray-600'
-                                  }`}
+                                  className={`flex justify-between items-center text-sm p-2 rounded-lg ${lap.lapTime === sessionFastest ? 'bg-green-50 text-green-700' :
+                                      lap.lapTime === sessionSlowest ? 'bg-red-50 text-red-700' :
+                                        'bg-gray-50 text-gray-600'
+                                    }`}
                                 >
                                   <span>Lap {lap.id}</span>
                                   <span className="font-mono">{formatTime(lap.lapTime)}</span>
@@ -266,11 +265,10 @@ function App() {
           {/* Start/Stop Button */}
           <button
             onClick={handleStartStop}
-            className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg ${
-              isRunning
+            className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg ${isRunning
                 ? 'bg-red-500 hover:bg-red-600 text-white'
                 : 'bg-green-500 hover:bg-green-600 text-white'
-            }`}
+              }`}
           >
             {isRunning ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-0.5" />}
           </button>
@@ -279,11 +277,10 @@ function App() {
           <button
             onClick={handleLap}
             disabled={!isRunning}
-            className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg ${
-              isRunning
+            className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg ${isRunning
                 ? 'bg-blue-500 hover:bg-blue-600 text-white'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
+              }`}
           >
             <Flag className="w-5 h-5" />
           </button>
@@ -292,11 +289,10 @@ function App() {
           <button
             onClick={handleReset}
             disabled={time === 0}
-            className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg ${
-              time > 0
+            className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg ${time > 0
                 ? 'bg-gray-600 hover:bg-gray-700 text-white'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
+              }`}
           >
             <RotateCcw className="w-5 h-5" />
           </button>
@@ -312,17 +308,15 @@ function App() {
               {lapTimes.map((lap) => (
                 <div
                   key={lap.id}
-                  className={`flex justify-between items-center p-4 border-b border-gray-100/50 last:border-b-0 transition-colors hover:bg-white/50 ${
-                    lap.lapTime === fastest ? 'bg-green-50/50' : 
-                    lap.lapTime === slowest ? 'bg-red-50/50' : ''
-                  }`}
+                  className={`flex justify-between items-center p-4 border-b border-gray-100/50 last:border-b-0 transition-colors hover:bg-white/50 ${lap.lapTime === fastest ? 'bg-green-50/50' :
+                      lap.lapTime === slowest ? 'bg-red-50/50' : ''
+                    }`}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      lap.lapTime === fastest ? 'bg-green-100 text-green-700' :
-                      lap.lapTime === slowest ? 'bg-red-100 text-red-700' :
-                      'bg-gray-100 text-gray-600'
-                    }`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${lap.lapTime === fastest ? 'bg-green-100 text-green-700' :
+                        lap.lapTime === slowest ? 'bg-red-100 text-red-700' :
+                          'bg-gray-100 text-gray-600'
+                      }`}>
                       {lap.id}
                     </div>
                     <div>
@@ -357,6 +351,26 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* Footer */}
+      <footer>
+        <div className="max-w-md mx-auto px-6 py-4">
+          <div className="text-center">
+            <p className="text-sm text-gray-600">
+              Created with ❤️ by{' '}
+              <a
+                href="https://mrsonu.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-indigo-600 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
+              >
+                Sonu Kumar
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
+
     </div>
   );
 }
